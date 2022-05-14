@@ -78,6 +78,7 @@ A few notes about this:
 Use the `CMD` command to execute a script that should run when a container starts using this image.
 
 ```Dockerfile
+RUN chmod +x gunicorn.sh
 CMD [ "./gunicorn.sh" ]
 ```
 
@@ -89,8 +90,8 @@ CMD [ "python3", "manage.py", "runserver" ]
 Before we can continue, add the script file `gunicorn.sh` to the root of your git repository and install `gunicorn` if it isn't already with `pip3 install gunicorn` (and rerun `pip freeze`):
 
 ```sh
+#!/bin/sh
 python3 manage.py migrate
-python3 manage.py collectstatic
 
 gunicorn <your-django-project-name>.wsgi
 ```
